@@ -16,6 +16,7 @@ const {
   TVDB_API_KEY,
   MIA_USERNAME,
   MIA_PASSWORD,
+  PLEX_MIA_SYNC_DIR,
 } = process.env;
 
 if (!MIA_USERNAME || MIA_USERNAME.length < 2) {
@@ -56,8 +57,9 @@ app.get('/', (req, res) => res.redirect('/~'));
 app.use('/~', basicAuthMiddleware, express.static(path.resolve(__dirname, '..', 'static')));
 app.use('/~/js', basicAuthMiddleware, express.static(path.resolve(__dirname, 'public-js')));
 
+const syncPath = path.resolve(PLEX_MIA_SYNC_DIR || __dirname, 'sync.json');
+
 app.get('/latest', basicAuthMiddleware, (req, res) => {
-  const syncPath = path.resolve(__dirname, 'sync.json');
   if (fs.existsSync(syncPath)) {
     res.json({ latest: fs.readFileSync(syncPath, 'utf8') });
   } else {
@@ -108,7 +110,7 @@ const refresh = () => {
   library.load().then((showLibraries) => {
     return tvdb.load(showLibraries);
   }).then((missing) => {
-    fs.writeFileSync(path.resolve(__dirname, 'sync.json'), JSON.stringify(missing));
+    fs.writeFileSync(syncPath, JSON.stringify(missing));
     refreshProgress = null;
     broadcast(false);
   }).catch((err) => {

@@ -1,5 +1,9 @@
 FROM node:8.11.3-slim
 
+RUN mkdir -p /syncs
+
+ENV PLEX_MIA_SYNC_DIR=/syncs
+
 WORKDIR /opt/service
 
 COPY src /opt/service/src
