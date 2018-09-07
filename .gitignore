@@ -1,0 +1,5 @@
+src/example.ts
+src/_example.ts2
+node_modules
+lib
+yarn-error.log

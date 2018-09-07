@@ -1,0 +1,31 @@
+{
+  "name": "plex-mia",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "tsc -p tsconfig.json && node lib/index.js"
+  },
+  "dependencies": {
+    "compression": "^1.7.3",
+    "express": "^4.16.3",
+    "express-basic-auth": "^1.1.5",
+    "express-ws": "^4.0.0",
+    "node-fetch": "^2.2.0",
+    "node-tvdb": "^4.1.0",
+    "plex-api": "^5.2.1",
+    "queue": "^4.5.0",
+    "uuid": "^3.3.2"
+  },
+  "devDependencies": {
+    "@types/compression": "^0.0.36",
+    "@types/express": "^4.16.0",
+    "@types/express-ws": "^3.0.0",
+    "@types/jquery": "^3.3.6",
+    "@types/node": "^10.9.4",
+    "@types/node-fetch": "^2.1.2",
+    "@types/uuid": "^3.4.4",
+    "ts-node": "^7.0.1",
+    "typescript": "^3.0.3"
+  }
+}
