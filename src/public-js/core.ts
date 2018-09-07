@@ -147,7 +147,27 @@ const renderMissing = (rawMissing: any) => {
 </div>`
     ));
   }
+
+  filter();
 };
+
+const filter = () => {
+  const search = ($('input[type=search]').val() as string).toLowerCase().trim();
+  const cards = $('#accordion > .card');
+
+  if (!search) {
+    cards.css('display', 'block');
+  } else {
+    cards.each((index, card) => {
+      const title = $($(card).find('.btn')[0]).text();
+      if (title.toLowerCase().indexOf(search) === -1) {
+        $(card).css('display', 'none');
+      } else {
+        $(card).css('display', 'block');
+      }
+    });
+  }
+}
 
 getSocket().then(socket => {
   socket.addEventListener('message', (event) => {
@@ -158,4 +178,11 @@ getSocket().then(socket => {
   $('#refresh-button').click(() => {
     socket.send(JSON.stringify({ type: 'refresh' }));
   });
+
+  $('#search-form').on('submit', (e) => {
+    filter();
+    e.preventDefault();
+    return false;
+  });
 });
+
