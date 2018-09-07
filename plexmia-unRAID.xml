@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Container>
+  <Beta>False</Beta>
+  <Category>MediaServer:Video</Category>
+  <Date>2018-09-07</Date>
+  <Changes>Everything is Awesome</Changes>
+  <Name>Plex MIA</Name>
+  <Support>https://github.com/MarshallOfSound/plex-mia/issues</Support>
+  <Description>
+    [b]Plex MIA[/b][br][br]
+ 
+    Find those pesky missing episodes from your plex box
+  </Description>
+  <Project>https://github.com/MarshallOfSound/plex-mia</Project>
+  <Registry>https://hub.docker.com/r/marshallofsound/plex-mia/</Registry>
+  <Repository>marshallofsound/plex-mia</Repository>
+  <BindTime>true</BindTime>
+  <Privileged>false</Privileged>
+  <Environment>
+    <Variable>
+      <Name>TAUTULLI_BASE_URL</Name>
+      <Value>Base URL of your Tautulli instance - http://tautulli.com/</Value>
+    </Variable>
+    <Variable>
+      <Name>TAUTULLI_API_KEY</Name>
+      <Value>The API key for your Tautulli instance</Value>
+    </Variable>
+    <Variable>
+      <Name>TVDB_API_KEY</Name>
+      <Value>An API key for TVDB - https://www.thetvdb.com/member/api</Value>
+    </Variable>
+    <Variable>
+      <Name>MIA_USERNAME</Name>
+      <Value>admin</Value>
+    </Variable>
+    <Variable>
+      <Name>MIA_PASSWORD</Name>
+      <Value>admin</Value>
+    </Variable>
+  </Environment>
+  <Networking>
+    <Mode>bridge</Mode>
+    <Publish>
+      <Port>
+        <HostPort>8085</HostPort>
+        <ContainerPort>8085</ContainerPort>
+        <Protocol>tcp</Protocol>
+      </Port>
+    </Publish>
+  </Networking>
+  <Data>
+    <Volume>
+      <HostDir>/mnt/cache/appdata/plex-mia-syncs</HostDir>
+      <ContainerDir>/syncs</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+  </Data>
+<WebUI>http://[IP]:[PORT:8085]/~</WebUI>
+<Icon>https://raw.githubusercontent.com/MarshallOfSound/plex-mia/master/logo.png</Icon>
+<ExtraParams></ExtraParams>
+</Container>
